@@ -65,6 +65,7 @@ key idea about Kadane's algorithm is: if the max sum subarray lies in position k
 
     // this method is copy from the internet
     //this method can only find the max sum but not the array of the max sum. Because it only needs a number as the max, it can be really effiecient. O(n)
+    //problem: this method doesn't accept negative number!!!!  it's not fully considered Kadane's algorithm!
     public static int kadaneFromInternet(int[] A)
     {
         // stores maximum sum sub-array found so far
