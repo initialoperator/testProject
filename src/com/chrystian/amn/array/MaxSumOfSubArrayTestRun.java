@@ -33,7 +33,9 @@ key idea about Kadane's algorithm is: if the max sum subarray lies in position k
             for(int k = 0; k < length; k++){
                 numberArray[k] = new Integer(array[k]);
             }
-            System.out.println(findMaxSubarray(numberArray));
+            int max = kadaneFromInternet(numberArray);
+//            int max = findMaxSubarray(numberArray);
+            System.out.println(max);
         }
     }
 
@@ -48,7 +50,7 @@ key idea about Kadane's algorithm is: if the max sum subarray lies in position k
         return max;
     }
 
-    public static int findMaxSubarray(int[] array, int indexMax, int indexEnd, int currentMax, int currentSum){
+    private static int findMaxSubarray(int[] array, int indexMax, int indexEnd, int currentMax, int currentSum){
         if(array == null || array.length == 0)
             return 0;
         if(array.length - indexEnd == 1)
@@ -59,6 +61,29 @@ key idea about Kadane's algorithm is: if the max sum subarray lies in position k
         }else{
             return findMaxSubarray(array, indexMax, indexEnd+1, currentMax, newSum);
         }
+    }
+
+    // this method is copy from the internet
+    //this method can only find the max sum but not the array of the max sum. Because it only needs a number as the max, it can be really effiecient. O(n)
+    public static int kadaneFromInternet(int[] A)
+    {
+        // stores maximum sum sub-array found so far
+        int maxSoFar = 0;
+        // stores maximum sum of sub-array ending at current position
+        int maxEndingHere = 0;
+        // traverse the given array
+        for (int i: A)
+        {
+            // update maximum sum of sub-array "ending" at index i (by adding
+            // current element to maximum sum ending at previous index i-1)
+            maxEndingHere = maxEndingHere + i;
+            // if maximum sum is negative, set it to 0 (which represents
+            // an empty sub-array)
+            maxEndingHere = Integer.max(maxEndingHere, 0);
+            // update result if current sub-array sum is found to be greater
+            maxSoFar = Integer.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
     }
 
 

@@ -12,6 +12,12 @@ Some properties of this problem are: (I didn't consider this in my program yet, 
 *when using the loop, remember the initial max number (intial localMax needs to be resolved first).
 *The longer findMaxSubarray(xx,xx,xx,xx) method is about the relationship of the current sum&max and current ending position. The current sum and max must match the current ending position.
 
+
+There is a method kadaneFromInternet() that I copy from the internet, this method is very efficient!
+this method can only find the max sum but not the array of the max sum. Because it only needs a number as the max, it can be really effiecient. O(n)!
+
+
+
 Actually problem
 Kadane's Algorithm
 
