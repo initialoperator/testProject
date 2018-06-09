@@ -56,5 +56,11 @@ public class Matrix2D {
         }
     }
 
+    public Matrix2DNode getHeadUpLeft() {
+        return headUpLeft;
+    }
 
+    public void setHeadUpLeft(Matrix2DNode headUpLeft) {
+        this.headUpLeft = headUpLeft;
+    }
 }
