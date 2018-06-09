@@ -1,0 +1,4 @@
+for the matrix 2D problem, the original question is asking to found the section of continous 1's within a 2D matrix
+My implementation can be summarized as combined technique of loop and recursion.
+
+The program is not yet very effient. Improvement helps are welcomed.
