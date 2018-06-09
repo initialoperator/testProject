@@ -1,3 +1,18 @@
+Personal sum:
+Some properties of this problem are: (I didn't consider this in my program yet, having had the followings checked can make the run time O(n) in some cases)
+    -If the array contains all non-positive numbers, then the solution is the number in the array with the smallest magnitude.
+    -If the array contains all non-negative numbers, then the problem is trivial and the maximum sum is the sum of all the elements in the list.
+    -An empty set[clarification needed] is not valid.
+    -There can be multiple different sub-arrays that achieve the same maximum sum to the problem.
+
+*key idea about Kadane's algorithm is: if the max sum subarray lies in position k when the boundary is in i(initial) and n(end), what is the position of max sum subarray when the pointer is in n+1
+
+*The scanner.nextInt() may need to be followed by nextLine() to have the new line accepted.
+
+*when using the loop, remember the initial max number (intial localMax needs to be resolved first).
+*The longer findMaxSubarray(xx,xx,xx,xx) method is about the relationship of the current sum&max and current ending position. The current sum and max must match the current ending position.
+
+Actually problem
 Kadane's Algorithm
 
 Given an array containing both negative and positive integers. Find the contiguous sub-array with maximum sum.
@@ -24,3 +39,34 @@ Output
 6
 -1
 
+
+
+testcases
+Case-1:
+
+
+A[]={2,4,6,8}
+maximum contiguous subarry= {2, 4, 6, 8}
+maximum contiguous subarray sum= 20
+Case-2:
+
+
+A[]={-2, 3, -7, 5, -9}
+maximum contiguous subarry= {5}
+maximum contiguous subarray sum= 5
+Case-3:
+
+
+A[]={3, -4, 7, -9, 8, 7}
+maximum contiguous subarry= {8, 7}
+maximum contiguous subarray sum= 15
+
+A[]={3, -4, 9, -8, 8, 7}
+maximum contiguous subarry= {9, -8, 8, 7}
+maximum contiguous subarray sum= 16
+Case-4:
+
+
+A[]={3, -4, 9, -8, 8, 7}
+maximum contiguous subarry= {9, -8, 8, 7}
+maximum contiguous subarray sum= 16
