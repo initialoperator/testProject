@@ -1,4 +1,4 @@
-package com.chrystian.amn.recursion;
+package com.chrystian.amn.recursion.Matrix2D;
 
 public class Matrix2DNode {
     private Matrix2DNode leftNode;

@@ -88,5 +88,9 @@ key idea about Kadane's algorithm is: if the max sum subarray lies in position k
     }
 
 
+/*we can extend the method above:
+* 1. find the subarray with max sum - not returing just a single number but an actual array
+* 2. find the subarray with the most balanced A's and B's (or 0's and 1's)
+* */
 
 }

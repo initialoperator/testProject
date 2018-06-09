@@ -1,4 +1,4 @@
-package com.chrystian.amn.recursion;
+package com.chrystian.amn.recursion.Matrix2D;
 
 import java.util.ArrayList;
 import java.util.List;
