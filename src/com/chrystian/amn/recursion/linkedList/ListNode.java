@@ -42,19 +42,109 @@ public class ListNode {//this class is define by the problem, note that the inte
         }
     }
 
-    public int getVal() {
-        return val;
+    /*https://leetcode.com/problems/merge-k-sorted-lists/description/*/
+    public static ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length == 0 )
+            return null;
+        else{
+            ListNode head = null;
+            ListNode end = head;
+            boolean stillGoing = true;
+            int min = 0;
+            while(stillGoing){
+                stillGoing = false;
+                for(ListNode list : lists){
+                    if(list == null)
+                        continue;
+                    min = list.val;
+                    stillGoing = true;
+                }
+                if(!stillGoing)
+                    break;
+                for(ListNode list : lists){
+                    if(list == null)
+                        continue;
+                    min = Math.min(min, list.val);
+                }
+                if(head == null){
+                    end = new ListNode(min);
+                    head = end;
+                }else{
+                    end.next = new ListNode(min);
+                    end = end.next;
+                }
+                for(int i = 0; i < lists.length; i++){
+                    if(lists[i] == null)
+                        continue;
+                    if(lists[i].val == min){
+                        end.val = min;
+                        lists[i] = lists[i].next;
+                        break;
+                    }
+                }
+
+            }
+            return head;
+        }
     }
 
-    public void setVal(int val) {
-        this.val = val;
+    public static ListNode mergeKListsDivideAndConquer(ListNode[] lists) {
+        if(lists.length == 0)
+            return null;
+        if(lists.length == 1)
+            return lists[0];
+        else{
+            int length = lists.length;
+            int sublength1 = length/2;
+            int sublength2 = length - sublength1;
+            ListNode[] sublist1 = new ListNode[sublength1];
+            ListNode[] sublist2 = new ListNode[sublength2];
+            for(int i = 0; i < sublength1; i++){
+                sublist1[i] = lists[i];
+            }
+            for(int i = 0; i < sublength2; i++){
+                sublist2[i] = lists[i+sublength1];
+            }
+            ListNode ln1 = mergeKListsDivideAndConquer(sublist1);
+            ListNode ln2 = mergeKListsDivideAndConquer(sublist2);
+            return mergeListNodes(ln1,ln2);
+        }
     }
-
-    public ListNode getNext() {
-        return next;
-    }
-
-    public void setNext(ListNode next) {
-        this.next = next;
+    private static ListNode mergeListNodes(ListNode n1, ListNode n2){
+        ListNode head = null;
+        ListNode tail = head;
+//        while(true){
+            if(n1 == null){
+                if(head == null){
+                    tail = n2;
+                    head = tail;
+//                    break;
+                }else{
+                    tail.next = n2;
+                }
+            }else if(n2 == null){
+                if(head == null){
+                    tail = n1;
+                    head = tail;
+//                    break;
+                }else{
+                    tail.next = n1;
+                }
+            }else{
+                int min = Math.min(n1.val, n2.val);
+                if(head == null){
+                    tail = new ListNode(min);
+                    head = tail;
+                }else{
+                    tail.next = new ListNode(min);
+                    tail = tail.next;
+                }
+                if(min == n1.val)
+                    tail.next = mergeListNodes(n1.next, n2);
+                else
+                    tail.next = mergeListNodes(n1, n2.next);
+            }
+//        }
+        return head;
     }
 }

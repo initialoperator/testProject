@@ -26,8 +26,3 @@ Input:
   2->6
 ]
 Output: 1->1->2->3->4->4->5->6
-
-according to this article,
-https://leetcode.com/articles/merge-k-sorted-list/
-you can use a divide-and-conquer method (approach 5)
-I will try it
