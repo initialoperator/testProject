@@ -1,0 +1,5 @@
+Merge 2 sorted arrays algorithm
+https://www.geeksforgeeks.org/merge-two-sorted-arrays/
+As a reference, I have been using the second approach which has O(n1+n2) time and O(n1+n2) space
+
+

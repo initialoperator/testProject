@@ -26,3 +26,10 @@ Input:
   2->6
 ]
 Output: 1->1->2->3->4->4->5->6
+
+according to this article,
+https://leetcode.com/articles/merge-k-sorted-list/
+you can use a divide-and-conquer method (approach 5)
+I will try it
+
+心得：凡事看到array关于sorting或者merging的问题，首先可以想能不能用divide and conquer. D&C的方法暗示了时间是LogN
