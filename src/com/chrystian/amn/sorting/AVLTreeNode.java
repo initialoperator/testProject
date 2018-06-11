@@ -42,6 +42,16 @@ public class AVLTreeNode extends BinaryNode {
         AVLTreeNode pivot = leftDepth > rightDepth? (AVLTreeNode)root.leftChild:(AVLTreeNode)root.rightChild;
 
         //start to rotate and replace
+        if(parent == null){
+            if(root.value > pivot.value){
+                root.addChild(pivot.rightChild);
+                pivot.rightChild = root;
+            }else {
+                root.addChild(pivot.leftChild);
+                pivot.leftChild = root;
+            }
+            return;
+        }
         if(parent.leftChild == root){
             parent.leftChild = pivot;
             if(root.value > pivot.value){

@@ -87,9 +87,9 @@ public class BinaryNode {
     protected BinaryNode findParentOf(BinaryNode node){
         if(this.leftChild == node || this.rightChild == node)
             return this;
-        else if(leftChild != null || node.value <= this.value)
+        else if(leftChild != null && node.value <= this.value)
             return leftChild.findParentOf(node);
-        else if(rightChild != null || node.value > this.value)
+        else if(rightChild != null && node.value > this.value)
             return rightChild.findParentOf(node);
         return null;
     }
