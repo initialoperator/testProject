@@ -5,7 +5,7 @@ As a reference, I have been using the second approach which has O(n1+n2) time an
 
 https://www.geeksforgeeks.org/merge-two-sorted-arrays/
 
-AVL tree is a self-balanced binary tree.
+*AVL tree is a self-balanced binary tree.
 Its self-balancing feature lie in ROTATION!!!!!
 
 some key description on AVL tree rotation:
@@ -18,4 +18,12 @@ adjust()
 if parent doesn't exist, add root to pivot's child (side depends on value),
     if pivot has child node on that side, and that child node to root.
 if parent exists, add pivot as parent's correpoing child, then do the same as previous
-finally, if parent exist, run the entire adjust again.ß
+finally, if parent exist, run the entire adjust again.
+
+
+*Heap
+Heap is a tree structure that puts smaller value (or larger value at the top), the upper level element is guaranteed to be smaller than lower level.
+this page explains Heap insertion algorithem
+http://www.algolist.net/Data_structures/Binary_heap/Insertion
+-first find a "slot" to insert to the bottom (如果没有slot呢？)
+-adjust the new node's level by swapping with parent until a right level.
