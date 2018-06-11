@@ -27,3 +27,8 @@ this page explains Heap insertion algorithem
 http://www.algolist.net/Data_structures/Binary_heap/Insertion
 -first find a "slot" to insert to the bottom (如果没有slot呢？)
 -adjust the new node's level by swapping with parent until a right level.
+
+For heap insertion, we need to check its completeness, not the height difference.
+Doing height is a bit more difficult to go recursive.
+
+！！A smarter one to to node swap: only swap the value but not need for the actual node object
