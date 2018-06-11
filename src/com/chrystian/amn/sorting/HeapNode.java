@@ -6,7 +6,7 @@ public class HeapNode extends BinaryNode{//smallest elemnent on top
         super(i);
     }
 
-    public void add(HeapNode node){
+    public void addChild(HeapNode node){
         HeapNode parent = this.findEmptySlotParent();
         if(parent.leftChild == null)
             parent.leftChild = node;
@@ -14,32 +14,23 @@ public class HeapNode extends BinaryNode{//smallest elemnent on top
             parent.rightChild = node;
         adjust(parent, node);
     }
+
     public void adjust(HeapNode parent, HeapNode node){
-        if(parent == null)
+        if (parent==null)
             return;
-        if(parent.value > node.value){
+        else if(parent.value > node.value){
+            int temp = parent.value;
+            parent.value = node.value;
+            node.value = temp;
             HeapNode grandParent = this.findParentOf(parent);
-            if(grandParent != null){
-                if(grandParent.leftChild == parent){
-                    grandParent.leftChild = node;
-                }else {
-                    grandParent.rightChild = node;
-                }
-            }
-            if(parent.leftChild == node){
-                node.rightChild = parent.rightChild;
-                node.leftChild = parent;
-            }else {
-                node.leftChild = parent.leftChild;
-                node.rightChild = parent;
-            }
-            this.adjust(grandParent, parent);
+            adjust(grandParent, parent);
         }
     }
 
+
     public HeapNode findParentOf(HeapNode node){
         if(this == node)
-            return this;
+            return null;
         else{
             if(this.leftChild == node)
                 return (HeapNode)this.leftChild;
@@ -61,12 +52,12 @@ public class HeapNode extends BinaryNode{//smallest elemnent on top
         if(this.leftChild == null || this.rightChild == null)
             return this;
         else{
-            int depthLeft = this.leftChild.depth();
-            int depthRight = this.rightChild.depth();
-            if(depthLeft < depthRight){
+//            boolean leftBalanced =((HeapNode)this.leftChild).isCompletBalanced();
+            boolean rightBalanced = ((HeapNode)this.rightChild).isCompletBalanced();
+            if(rightBalanced){
                 HeapNode subLeft = (HeapNode)this.leftChild;
                 return subLeft.findEmptySlotParent();
-            }else{
+            }else {
                 HeapNode subRight = (HeapNode)this.rightChild;
                 return subRight.findEmptySlotParent();
             }
@@ -74,4 +65,40 @@ public class HeapNode extends BinaryNode{//smallest elemnent on top
         }
     }
 
+    public boolean isCompletBalanced(){
+        if(this.leftChild == null && this.rightChild != null)
+            return false;
+        if(this.leftChild != null && this.rightChild == null)
+            return false;
+        if(this.leftChild == null && this.rightChild == null)
+            return true;
+        return ((HeapNode)this.leftChild).isCompletBalanced() && ((HeapNode)this.rightChild).isCompletBalanced();
+    }
+
+//    public void adjust_delete(HeapNode parent, HeapNode node){
+//        if(parent == null)
+//            return;
+//        if(parent.value > node.value){
+//            HeapNode grandParent = this.findParentOf(parent);
+//            if(grandParent != null){
+//                if(grandParent.leftChild == parent){
+//                    grandParent.leftChild = node;
+//                }else {
+//                    grandParent.rightChild = node;
+//                }
+//            }
+//            if(parent.leftChild == node){
+//                node.rightChild = parent.rightChild;
+//                HeapNode temp = (HeapNode)node.leftChild;
+//                node.leftChild = parent;
+//                parent.leftChild = temp;
+//            }else {
+//                node.leftChild = parent.leftChild;
+//                HeapNode temp = (HeapNode)node.rightChild;
+//                node.rightChild = parent;
+//                parent.rightChild = temp;
+//            }
+//            this.adjust(grandParent, node);
+//        }
+//    }
 }
