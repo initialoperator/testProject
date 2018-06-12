@@ -27,3 +27,26 @@ this page explains Heap insertion algorithem
 http://www.algolist.net/Data_structures/Binary_heap/Insertion
 -first find a "slot" to insert to the bottom (如果没有slot呢？)
 -adjust the new node's level by swapping with parent until a right level.
+
+For heap insertion, we need to check its completeness, not the height difference.
+Doing height is a bit more difficult to go recursive.
+
+！！A smarter one to to node swap: only swap the value but not need for the actual node object
+
+
+Heap vs BST (AVL tree)
+full description: 排名第一的答案
+https://stackoverflow.com/questions/6147242/heap-vs-binary-search-tree-bst
+这个答案陈述了为什么heap insert average time complexity is O(1)
+https://stackoverflow.com/questions/39514469/argument-for-o1-average-case-complexity-of-heap-insertion
+Summary
+
+          Type      BST (*)   Heap
+Insert    average   log(n)    1
+Insert    worst     log(n)    log(n)
+Find any  worst     log(n)    n
+Find max  worst     1 (**)    1
+Create    worst     n log(n)  n
+*: everywhere in this answer, BST == Balanced BST, since unbalanced sucks asymptotically
+**: using a trivial modification explained in this answer
+
