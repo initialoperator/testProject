@@ -19,8 +19,8 @@ public class SortTestRun {
             return e;
         }).toArray();
         System.out.println("begin to sort");
-//        mergesort(array);
-        heapsort(array);
+        mergesort(array);
+//        heapsort(array);
         for(int i: array){
             System.out.println(i);
         }

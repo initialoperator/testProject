@@ -33,3 +33,8 @@ you can use a divide-and-conquer method (approach 5)
 I will try it
 
 心得：凡事看到array关于sorting或者merging的问题，首先可以想能不能用divide and conquer. D&C的方法暗示了时间是LogN
+
+
+https://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/#LinkedList
+following programs are for the link above
+LinkedList and Node
