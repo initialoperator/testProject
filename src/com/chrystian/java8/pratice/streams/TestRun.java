@@ -9,30 +9,74 @@ import java.util.stream.Stream;
 public class TestRun {
     public static void main(String[] args) {
         // Creating a list of Strings
-        List<String> list = Arrays.asList("25", "225", "1000",
-                "20", "15");
-        List<Integer> listInt = Arrays.asList(10, 19, 20, 1, 2);
-        List<Integer> listRandom = new ArrayList<>();
-        Random r = new Random();
-        IntStream.range(0, 20).forEach(i -> {
-            listRandom.add(r.nextInt(100));
-        });
+//        List<String> list = Arrays.asList("25", "225", "1000",
+//                "20", "15");
+//        List<Integer> listInt = Arrays.asList(10, 19, 20, 1, 2);
+//        List<Integer> listRandom = new ArrayList<>();
+//        Random r = new Random();
+//        IntStream.range(0, 20).forEach(i -> {
+//            listRandom.add(r.nextInt(100));
+//        });
+//
+//        List<String> textes = Arrays.asList("public", "static", "StringJoiner", "Amazon", "Madamasca", "Son_Masayoshi");
+////        findAny();
+////        optional2();
+////        System.out.println("for each order starts");
+////        forEachOrder(listRandom);
+////        System.out.println("for each starts:");
+////        forEach(listRandom);
+////        filter(listRandom);
+////        flatMapToInt();
+////        flatMap();
+////        map();
+////        loopSimulate();
+//        filterString(textes);
 
-        List<String> textes = Arrays.asList("public", "static", "StringJoiner", "Amazon", "Madamasca", "Son_Masayoshi");
-//        findAny();
-//        optional2();
-//        System.out.println("for each order starts");
-//        forEachOrder(listRandom);
-//        System.out.println("for each starts:");
-//        forEach(listRandom);
-//        filter(listRandom);
-//        flatMapToInt();
-//        flatMap();
-//        map();
-//        loopSimulate();
-        filterString(textes);
+//solution(5);
+        int[] a = {-8, -4, 0 , 5, -4, 6};
+        System.out.println(solution(a));
+    }
 
 
+    public static void solution(int N) {
+        // write your code in Java SE 8
+        IntStream.range(0, N-1).forEach((i) -> System.out.println("L"));
+        IntStream.range(0, N).forEach((i) -> System.out.print("L"));
+    }
+
+
+    public static int solution(int[] A) {
+        // write your code in Java SE 8
+        int length = A.length;
+        long resultL =  IntStream.range(0,length).flatMap(i -> {
+            return IntStream.range(0, length).map(j -> {
+                if(A[i] == A[j]&& i!=j)
+                    return 1;
+                else return 0;
+            });
+        }).filter(i -> i ==1).count();
+        resultL = resultL/2;
+        if(resultL > 1000000000L)
+            return 1000000000;
+        else
+            return (int)resultL;
+    }
+
+
+    public static int solution1(int[] A) {
+        // write your code in Java SE 8
+
+        int length = A.length;
+
+
+        int result = IntStream.range(0,length).flatMap(i -> {
+            return IntStream.range(0, length).map(j -> {
+                int vali = A[i];
+                int valj = A[j];
+                return vali + valj + Math.abs(i - j);
+            });
+        }).max().getAsInt();
+        return  result;
     }
 
     private static void findAny(){
