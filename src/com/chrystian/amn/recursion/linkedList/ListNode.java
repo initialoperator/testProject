@@ -7,7 +7,60 @@ public class ListNode {//this class is define by the problem, note that the inte
     ListNode(int x) {
         val = x;
     }
+    
+    public static void main(String[] args) {
+    	ListNode head = new ListNode(1);
+    	ListNode curr = head;
+    	
+    	for (int i = 2; i < 10; i++) {
+    		curr.next = new ListNode(i);
+    		curr = curr.next;
+    	}
+    	
+//    	printNode(head);
+    	
+    	ListNode reverse = head.reverse();
+    	
+    	printNode(reverse);
+    }
+    
+    public static void printNode(ListNode head) {
+    	ListNode curr = head;
+    	while(curr != null) {
+    		System.out.print(curr.val + "->");
+    		curr = curr.next;
+    	}    	
+    	System.out.println("");
+    }
 
+    public ListNode reverse() {
+    	if(this.next == null)
+    		return this;
+    	else {
+    		ListNode prev = this;
+    		ListNode curr = next;
+    		ListNode result = reverseNode(prev, curr);
+    		prev.next = null;
+    		return result;
+    			
+    	}    		
+    	
+    }
+    
+    private static ListNode reverseNode(ListNode prev, ListNode curr) {
+    	if(curr.next == null) {
+    		curr.next = prev;
+    		return curr;
+    	}else {
+    		ListNode nextOne = curr.next;
+    		curr.next = prev;    		
+    		ListNode node = reverseNode(curr, nextOne);
+    		
+    		return node;
+    	}
+    	
+    }
+    
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         //assuming val is no greater than 9 and no smaller than 0 because it's a digit
         if (l1 == null && l2 == null) {

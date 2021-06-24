@@ -1,6 +1,6 @@
 package com.chrystian;
 
-import javafx.util.Pair;
+//import javafx.util.Pair;
 
 import java.util.Random;
 import java.util.stream.IntStream;

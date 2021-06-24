@@ -1,20 +1,35 @@
 package com.chrystian.concurrent;
 
-import org.junit.jupiter.api.Test;
 
-import javax.swing.tree.FixedHeightLayoutCache;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NormalClass {
 
     int sum = 0;
 
+    final AtomicInteger count = new AtomicInteger(0);
+    
+    volatile Integer count2 = 0;
+    
+    public void getCount() {
+        
+        count.incrementAndGet();       
+//        System.out.println(count.incrementAndGet());
+    }
+    
+    public void reentrantCount() {
+    	Lock lock = new ReentrantLock();
+    	lock.tryLock();
+    	count2++;
+    	System.out.println(count2);
+    	lock.unlock();
+    	System.gc();
+    }
+    
     public int getSum() {
         return sum;
     }
@@ -81,8 +96,21 @@ public class NormalClass {
         System.out.println(t1.getName());
         Thread t2 = new Thread(c::blockingMethod);
         System.out.println(t2.getName());
-        t1.start();
-        Thread.sleep(50);
-        t2.start();
+//        t1.start();
+//        Thread.sleep(50);
+//        t2.start();
+        
+        Thread t3 = new Thread(() -> {
+        	IntStream.range(0,10).forEach(count -> c.reentrantCount());
+        });
+        Thread t4 = new Thread(() -> {
+        	IntStream.range(0,10).forEach(count -> c.reentrantCount());
+        });
+        Thread t5 = new Thread(() -> {
+        	IntStream.range(0,10).forEach(count -> c.reentrantCount());
+        });
+        t3.start();
+        t4.start();
+        t5.start();
     }
 }

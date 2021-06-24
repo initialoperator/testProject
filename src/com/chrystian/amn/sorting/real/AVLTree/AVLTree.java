@@ -131,7 +131,7 @@ class AVLTree {
         tree.root = tree.insert(tree.root, 50);
         tree.root = tree.insert(tree.root, 25);
 
-        /* The constructed AVL Tree would be
+        /* The constructed AVL TreeNode would be
              30
             /  \
           20   40

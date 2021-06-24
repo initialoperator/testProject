@@ -1,6 +1,6 @@
 package com.chrystian.amn.sorting.real.AVLTree;
 
-// Java program for insertion in AVL Tree
+// Java program for insertion in AVL TreeNode
 class Node {
     int key, height;
     Node left, right;

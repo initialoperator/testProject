@@ -1,26 +1,92 @@
 package com.chrystian.amn.recursion;
 
-import javafx.util.Pair;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.stream.IntStream.of;
 
 public class FindPalindrome {
 
     public static void main(String[] args){
-        int i = 12;
-        String s = "12";
-        try{
-            Integer si = Integer.parseInt(s);
-            System.out.println(i == si);
-        }catch (NumberFormatException e){
-
-        }
+        String s = "abcdcb";
+        FindPalindrome sol = new FindPalindrome();
+        String palindrome = sol.findPalindromeSubstring(s);
+        System.out.println(palindrome);
     }
 
+    public String findPalindromeSubstring2(String input){
+    	int[] mark = new int[2];//0 -> position 1 -> length
+    	int n = input.length();
+    	String rev = new StringBuilder(input).reverse().toString();
+    	System.out.println("rev:" + rev);
+    	for(int shift = 0; shift < n; shift++) {
+    		
+    		int count = 0;
+			boolean equalsMet = false;
+			
+    		for(int i = 0; i <= n - shift; i ++) {
+//    			System.out.println((i+shift) + "-" + i + ": "+ input.charAt(i+shift) + "-"+ rev.charAt(i) + " shift: " + shift);
+    			if(i == n - shift
+    					|| equalsMet && input.charAt(i+shift) != rev.charAt(i)) {
+    				equalsMet = false;
+					if(count > mark[1]) {
+						mark[0] = i + shift - count;
+						mark[1] = count;
+					}
+					count = 0;
+    			}else if(input.charAt(i+shift) == rev.charAt(i)) {
+    				equalsMet = true;
+    				count++;
+    			}
+    		}
+    		
+    		
+    	}
+    	System.out.println("mark: " + Arrays.toString(mark));
+    	return input.substring(mark[0], mark[0] + mark[1]);
+    	
+    }
+    
+    public String findPalindromeSubstring(String input){
+    	int[] mark = new int[2];//0 -> position 1 -> length
+    	int n = input.length();
+    	System.out.println("n: " + n);
+    	for(int shift =  -n + 1; shift < n; shift++) {
+    		System.out.println("shift: " + shift);
+    		int limit = shift >= 0 ? n - shift: n+shift;
+    		
+    		int count = 0;
+    		boolean equalsMet = false;
+    		for(int i = shift; i < limit; i++) {
+    			int position = (i+shift)%n;
+    			int k = limit - position - 1;
+    			char head = input.charAt(position);
+    			char tail = input.charAt(k);
+    			System.out.println("head: " + head + " tails: "+tail);
+    			if(i == limit
+    					|| equalsMet && head != tail) {
+    				equalsMet = false;
+    				if(count > mark[1]) {
+    					mark[1] = count;
+    					mark[0] = i - count;
+    				}
+    			}else if (input.charAt(position) == input.charAt(k)) {
+    				count++;
+    				equalsMet = true;
+    			}
+    		}
+    		
+    	}
+    	return input.substring(mark[0], mark[1]);
+    	
+    }
+    
     List<List<Integer>> optimalUtilization(
             int deviceCapacity,
             List<List<Integer>> foregroundAppList,
@@ -197,47 +263,48 @@ public class FindPalindrome {
         return left == right? 0 : 1;
     }
 
-    private static String findPalindromeSubstring(String input){
-
-        if(input.length() == 1){
-            return input;
-        }
-        Stack<Character> cStack = new Stack<>();
-        Stack<Integer> iStack = new Stack<>();
-
-
-        char[] array = input.toCharArray();
-        List<Pair<Integer, Integer>> panPairs = IntStream.range(0, input.length()).mapToObj(i -> {
-            return findMaxPanlidromeWidth(i, array);
-        }).collect(Collectors.toList());
-
-        List<Pair<Integer, Integer>> indexPairs= panPairs.stream().sorted(new Comparator<Pair<Integer, Integer>>() {
-            @Override
-            public int compare(Pair<Integer, Integer> o1, Pair<Integer, Integer> o2) {
-                int diff1 = Math.abs(o1.getKey() - o2.getValue());
-                int diff2 = Math.abs(o2.getKey() - o2.getValue());
-                return diff1 > diff1 ? -1 : 1;
-            }
-        }).collect(Collectors.toList());
-        Optional<Pair<Integer, Integer>> longestOptional = indexPairs.stream().findFirst();
-
-        Pair<Integer, Integer> longest = longestOptional.get();
-        StringBuilder sb = new StringBuilder();
-        IntStream.range(longest.getKey(), longest.getValue()+1).mapToObj(i -> array[i]).forEach(sb::append);
-
-        return sb.toString();
-    }
-
-    private static Pair<Integer, Integer> findMaxPanlidromeWidth(int pivot, char[] array){
-        int localMax = 0;
-        for(int i = 1; pivot  + i < array.length && pivot - i >= 0; i++){
-            if(array[pivot - i] == array[pivot + i])
-                localMax = i;
-            else
-                break;
-        }
-        return new Pair<>(pivot-localMax, pivot+localMax);
-    }
+    
+//    private static String findPalindromeSubstring(String input){//using Pair from java fx, avoided
+//
+//        if(input.length() == 1){
+//            return input;
+//        }
+//        Stack<Character> cStack = new Stack<>();
+//        Stack<Integer> iStack = new Stack<>();
+//
+//
+//        char[] array = input.toCharArray();
+//        List<Pair<Integer, Integer>> panPairs = IntStream.range(0, input.length()).mapToObj(i -> {
+//            return findMaxPanlidromeWidth(i, array);
+//        }).collect(Collectors.toList());
+//
+//        List<Pair<Integer, Integer>> indexPairs= panPairs.stream().sorted(new Comparator<Pair<Integer, Integer>>() {
+//            @Override
+//            public int compare(Pair<Integer, Integer> o1, Pair<Integer, Integer> o2) {
+//                int diff1 = Math.abs(o1.getKey() - o2.getValue());
+//                int diff2 = Math.abs(o2.getKey() - o2.getValue());
+//                return diff1 > diff1 ? -1 : 1;
+//            }
+//        }).collect(Collectors.toList());
+//        Optional<Pair<Integer, Integer>> longestOptional = indexPairs.stream().findFirst();
+//
+//        Pair<Integer, Integer> longest = longestOptional.get();
+//        StringBuilder sb = new StringBuilder();
+//        IntStream.range(longest.getKey(), longest.getValue()+1).mapToObj(i -> array[i]).forEach(sb::append);
+//
+//        return sb.toString();
+//    }
+//
+//    private static Pair<Integer, Integer> findMaxPanlidromeWidth(int pivot, char[] array){
+//        int localMax = 0;
+//        for(int i = 1; pivot  + i < array.length && pivot - i >= 0; i++){
+//            if(array[pivot - i] == array[pivot + i])
+//                localMax = i;
+//            else
+//                break;
+//        }
+//        return new Pair<>(pivot-localMax, pivot+localMax);
+//    }
 
 
 }
