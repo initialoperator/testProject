@@ -53,6 +53,7 @@ public class FindPalindrome {
     	
     }
     
+    
     public String findPalindromeSubstring(String input){
     	int[] mark = new int[2];//0 -> position 1 -> length
     	int n = input.length();
