@@ -23,9 +23,12 @@ public class ResultTest {
 		// int result = sol.findQueens(7);
 		// System.out.println(result);
 
-		String roman = sol.intToRoman(49);
-		System.out.println(roman);
+		// String roman = sol.intToRoman(49);
+		// System.out.println(roman);
 
+		StringBuilder sb = new StringBuilder("hello");
+		sb.deleteCharAt(0);
+		System.out.println(sb);
 	}
 
 	public String intToRoman(int num) {//doing hard code if else is faster than using the folowing logic
