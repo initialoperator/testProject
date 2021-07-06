@@ -3,14 +3,15 @@ package com.chrystian.interviews;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class ResultTest {
 	public static void main(String[] args) {
 
-//		int m = Math.floorDiv(-25, 4);
-//		System.out.println(m);
+		int m = Math.floorMod(5, -4);
+		// System.out.println(m);
 		
-		int[] array = new int[]{7,-9,15,-2};
+		// int[] array = new int[]{7,-9,15,-2};
 //		int pos = Arrays.binarySearch(array, -9);		
 //		System.out.println("pos: " + pos);
 //		Arrays.sort(array);
@@ -19,9 +20,47 @@ public class ResultTest {
 		
 
 		ResultTest sol = new ResultTest();
-		int result = sol.findQueens(7);
-		System.out.println(result);
+		// int result = sol.findQueens(7);
+		// System.out.println(result);
+
+		// String roman = sol.intToRoman(49);
+		// System.out.println(roman);
+
+		StringBuilder sb = new StringBuilder("hello");
+		sb.deleteCharAt(0);
+		System.out.println(sb);
 	}
+
+	public String intToRoman(int num) {//doing hard code if else is faster than using the folowing logic
+		char[] digits = new char[]{'M', 'D','C','L','X','V','I'};
+		int[] numbers = new int[]{1000,500,100,50,10,5,1};
+        int remainder = num;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < digits.length; i += 2){
+            int index = i;
+            int digitNum = remainder/numbers[i];
+			// System.out.println("digitNum: " + digitNum);
+            if(digitNum == 0)
+                continue;
+            else if(digitNum < 4){
+                IntStream.range(0, digitNum).forEach(d -> sb.append(digits[index]));
+            }else if(digitNum < 9){
+                StringBuilder temp = new StringBuilder();
+				temp.append(digits[index-1]);
+				// System.out.println("temp: " + temp);
+                int diff = Math.abs(digitNum - 5);
+                IntStream.range(0, diff).forEach(d -> temp.append(digits[index]));
+                if(digitNum < 5)
+                    temp.reverse();
+                sb.append(temp);
+            }else{
+                sb.append(digits[i]); sb.append(digits[i-2]);
+            }
+            remainder = remainder % numbers[i];
+			// System.out.println("stringBuilder in the middle: " + sb);
+        }
+        return sb.toString();
+    }
 
 	private static int calculateBitNumber(int target) {
 		int bitmax = 32 - Integer.numberOfLeadingZeros(target);
@@ -165,6 +204,5 @@ public class ResultTest {
         dp.put(number, result);
         return result;
     }
-    
     
 }
